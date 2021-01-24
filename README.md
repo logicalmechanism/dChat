@@ -1,5 +1,5 @@
 # dChat
-An unrestricted and decentralized communication platform. Each message is sent as part of the meta data for a transaction. Expect messages to arrive on the ledger about 20 seconds after submission .
+An unrestricted and decentralized communication platform. Each message is sent as part of the meta data for a transaction. Expect messages to arrive on the ledger about 20 seconds after submission.
 
 ## This will always be an open source project. 
 ## Chat wallets are always controlled by the user.
@@ -8,7 +8,7 @@ An unrestricted and decentralized communication platform. Each message is sent a
 > Fully synced cardano-node, python, bash, and Ubuntu 20.
 
 ## Create a chat wallet
-Pull the dchat git into the $CNODE_HOME folder.
+Pull the dchat git into the ${CNODE_HOME} folder.
 
 >git clone https://github.com/logicalmechanism/dChat
 

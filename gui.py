@@ -120,8 +120,9 @@ while True:
         balance = functions.getBalance(wallet_addr)
         window['-ADA-'].update(balance)
         window['-OUTPUT-'].update("Loading Chat Messages...")
-        data = scrapMetaData.get_last_transaction()
-        text = ""
+        data, price = scrapMetaData.get_last_transaction()
+        print(price)
+        text = "\n" + str(price) + "\n"
         for message in data:
             for msg in message:
                 if int(msg) == 3:

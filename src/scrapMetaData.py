@@ -9,6 +9,7 @@ def get_last_transaction():
     # url = 'https://cardanoscan.io/metadata'
     req = urllib3.PoolManager()
     messages = []
+    price = ''
     for p in range(1, 10):
         url = 'https://cardanoscan.io/metadata?pageNo=' + str(p)
         res = req.request('GET', url)
@@ -28,7 +29,16 @@ def get_last_transaction():
                             messages.append(data)
                     except (TypeError, KeyError):
                         pass
-    return messages
+                    try:
+                        if price == '':
+                            price += "ADAUSD: "+ data["ADAUSD"][0]["value"]
+                            price += " ADABTC: "+ data["ADABTC"][0]["value"]
+                            price += " BTCUSD: "+ data["BTCUSD"][0]["value"]
+
+                    except (TypeError, KeyError):
+                        pass
+                        
+    return messages, price
 
 
 
