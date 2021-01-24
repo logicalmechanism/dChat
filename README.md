@@ -6,13 +6,16 @@ An unrestricted and decentralized communication platform.
 
 ## Create a chat wallet
 Pull the dchat git into the $CNODE_HOME folder.
+
+>git clone https://github.com/logicalmechanism/dChat
+
 Inside the dChat directory is the new_addr.sh file. Run this file with this command:
 
 >bash ${CNODE_HOME}/dChat/new_addr.sh
 
 This will create a wallet with payment/stake keys in the folder called main_user. This wallet will allow the user to send messages on dChat. 
 
-It will also prompt the user to input the return wallet address as well. This will allow the user to extract funds.
+It will also prompt the user to input the return wallet address as well. This will allow the user to extract funds. The wallet address is stored in the return_user folder inside the return_base.addr file.
 
 > new_addr.sh will only create a single address so it will not overwrite hot keys for a wallet.
 
