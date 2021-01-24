@@ -2,16 +2,22 @@ import pprint
 import json
 import hashlib
 import datetime
+import random
+
 
 def formatData(values):
+    # Username
     username = values['-USER-']
     if username != '':
         username = username[:64]
-    
+    else:
+        username = random.getrandbits(64)
     # Message
     message = values['-IN-']
-    if message != '':
+    if message != '\n':
         message = [message[i:i+64] for i in range(0, len(message), 64)]
+    else:
+        message = ''
     return username, message
 
 def createChatHash():

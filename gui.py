@@ -9,27 +9,23 @@ import random
 wallet_addr = ''
 with open('main_user/main_base.addr', 'r') as file:
     wallet_addr = file.read()[:-1]
-sg.theme('DarkAmber')
+sg.theme('Black')
 
-# Header
-header = [
-    sg.Text('Chat: ' + parameters.createChatHash()),
-    sg.Text('Channel: ' + parameters.createChannelHash()),
-    sg.Button('QR Code'),
-    sg.Button("QUIT")
-]
-
-# Body
-body = [sg.Text('Click Refresh',size=(128,48), key='-OUTPUT-', background_color='black')]
 
 # Screen Layout
 layout = [
     [sg.Text('Chat: ' + parameters.createChatHash())],
     [sg.Text('Channel: ' + parameters.createChannelHash())],
     [sg.Button("QUIT"), sg.Button("REFRESH")],
-    [sg.Button("Wallet QR Code"), sg.Button("Return ADA")],
+    [
+        sg.Button("Wallet QR Code"),
+        sg.Button("Return ADA", key='-RETURN-'),
+        sg.Text("Return ADA", key='-RETURNTEXT-', visible=False),
+        sg.Button('Confirm', key='-RCONFIRM-', visible=False),
+        sg.Button('Cancel', key='-RCANCEL-', visible=False)
+    ],
     [sg.Image(filename='', key='-QRCODE-', visible=False)],
-    body,
+    [sg.Text('Click Refresh',size=(96,48), key='-OUTPUT-', background_color='black')],
     [
         sg.Text("Username:"),
         sg.Input(key='-USER-', size=(16,1)),
@@ -48,8 +44,10 @@ layout = [
     ]
 ]
 
+
 # Create the window
 window = sg.Window("dChat", layout)
+
 
 # Create an event loop
 while True:
@@ -95,6 +93,7 @@ while True:
             'self_trx_submit.sh'
         ]
         output = subprocess.check_output(function)
+        window['-OUTPUT-'].update("Sending Message to the Network. Please Click REFRESH")
         window['-SEND-'].update(visible=True)
         window['-CONFIRM-'].update(visible=False)
         window['-CANCEL-'].update(visible=False)
@@ -127,11 +126,30 @@ while True:
         window['-OUTPUT-'].update(text)
     
     # Return All ADA to return address
-    if event == "Return ADA":
+    if event == "-RETURN-":
+        window['-RETURNTEXT-'].update(visible=True)
+        window['-RCONFIRM-'].update(visible=True)
+        window['-RCANCEL-'].update(visible=True)
+        window['-RETURN-'].update(visible=False)
+    if event == "-RCONFIRM-":
+        window['-RCONFIRM-'].update(visible=False)
+        window['-RCANCEL-'].update(visible=False)
+        window['-RETURNTEXT-'].update(visible=False)
+        window['-RETURN-'].update(visible=True)
         function = [
             'bash',
             'return_trx.sh'
         ]
         output = subprocess.check_output(function)
+        window['-OUTPUT-'].update("Returning All Funds. Please Click REFRESH.")
+        #
+    if event == '-RCANCEL-':
+        window['-RCONFIRM-'].update(visible=False)
+        window['-RCANCEL-'].update(visible=False)
+        window['-RETURNTEXT-'].update(visible=False)
+        window['-RETURN-'].update(visible=True)
+
+
+
 # Close
 window.close()
