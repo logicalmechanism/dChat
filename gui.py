@@ -16,6 +16,10 @@ sg.theme('Black')
 layout = [
     [sg.Text('Chat: ' + parameters.createChatHash())],
     [sg.Text('Channel: ' + parameters.createChannelHash())],
+    [
+        sg.Text('Wallet Address:'),
+        sg.Input(wallet_addr,text_color = 'black', background_color='white', readonly=True, size=(106,1))
+    ],
     [sg.Button("QUIT"), sg.Button("REFRESH")],
     [
         sg.Button("Wallet QR Code"),
