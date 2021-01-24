@@ -8,7 +8,7 @@ An unrestricted and decentralized communication platform.
 Pull the dchat git into the $CNODE_HOME folder.
 Inside the dChat directory is the new_addr.sh file. Run this file with this command:
 
->bash ${CNODE_HOME}/dchat/new_addr.sh
+>bash ${CNODE_HOME}/dChat/new_addr.sh
 
 This will create a wallet with payment/stake keys in the folder called main_user. This wallet will allow the user to send messages on dChat. 
 
@@ -33,4 +33,4 @@ sudo systemctl start cnode
 
 source ${CNODE_HOME}/scripts/env
 
-python ${CNODE_HOME}/dchat/gui.py
+python ${CNODE_HOME}/dChat/gui.py
